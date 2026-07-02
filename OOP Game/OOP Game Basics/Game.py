@@ -32,6 +32,23 @@ def create_objects():
     ]
 
 
+def interact_with_object(obj, interaction):
+    match interaction:
+        case 1:
+            return obj.look()
+        case 2:
+            return obj.touch()
+        case 3:
+            return obj.sniff()
+        case _:
+            return "Invalid choice!"
+
+
+def get_object_interaction_string(name):
+    return (f"How do you want to interact with the {name}?\n"
+            f"1. Look\n2. Touch\n3. Smell\n")
+
+
 class Game:
     def __init__(self):
         self.attempts = 0
@@ -39,8 +56,22 @@ class Game:
 
     def take_turn(self):
         prompt = self.get_room_prompt()
-        selection = input(prompt)
-        print(selection)
+        selection = int(input(prompt))
+        if 1 <= selection <= 5:
+            self.select_object(selection-1)
+            self.take_turn()
+        elif selection <= 0:
+            print("Goodbye!")
+            return
+        else:
+            if self.guess_code(selection):
+                print("Congratulations! You win!")
+            else:
+                if self.attempts == 3:
+                    print("LOSER")
+                else:
+                    print(f"Incorrect choice! You have {3-self.attempts} attempts remaining!")
+                    self.take_turn()
 
     def get_room_prompt(self):
         prompt = "Enter the 3 digit lock code or choose an item to interact with:\n"
@@ -50,3 +81,17 @@ class Game:
             prompt += f"{index}: {name}\n"
             index += 1
         return prompt
+
+    def select_object(self, index):
+        selected_object = self.room.game_objects[index]
+        prompt = get_object_interaction_string(selected_object.name)
+        interaction = int(input(prompt))
+        print(interact_with_object(selected_object, interaction))
+        return
+
+    def guess_code(self, guess):
+        if self.room.check_code(guess):
+            return True
+        else:
+            self.attempts += 1
+            return False
