@@ -17,3 +17,6 @@ for k, v in d.items():
     print(k, v)
 
 print({k.upper(): v*2 for k, v in d.items()})
+print(d['pear'])
+d['pear'] += 1
+print(d['pear'])
