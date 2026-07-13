@@ -7,8 +7,6 @@ def bubble_sort(nums: list[int]) -> list[int]:
                 swapped = True
         if not swapped:
             return nums
-
-
     return nums
 
 def insertion_sort(unsorted_list: list[int]) -> list[int]:
@@ -33,7 +31,7 @@ def selection_sort(unsorted_list: list[int]) -> list[int]:
 
 if __name__ == "__main__":
     unsorted_list = [int(x) for x in input().split()]
-    res = selection_sort(unsorted_list)
+    #res = selection_sort(unsorted_list)
     #res = insertion_sort(unsorted_list)
-    #res = bubble_sort(unsorted_list)
+    res = bubble_sort(unsorted_list)
     print(" ".join(map(str, res)))
