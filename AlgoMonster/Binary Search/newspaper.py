@@ -33,7 +33,7 @@ if __name__ == "__main__":
     #newspapers_read_times = [2, 3, 5, 7]
     #12 8 15 20 6 9 14 3 18 7 11 5 22
 
-    newspapers_read_times = [12, 8, 15, 20, 6,9,14,3,18,7,11,5,22]
+    newspapers_read_times = [12, 8, 15, 20, 6, 9, 14, 3, 18, 7, 11, 5, 22]
     num_coworkers = 4
     #num_coworkers = int(input())
     #num_coworkers = 3
